@@ -18,7 +18,7 @@ export function ControlPanel() {
   } = useSimulation();
 
   return (
-    <div className="fixed top-6 right-6 z-40 w-80 glass-strong rounded-2xl p-5 shadow-2xl border border-white/10 backdrop-blur-md transition-all duration-500 hover:border-white/20 hover:shadow-[0_0_30px_rgba(255,255,255,0.05)]">
+    <div className="absolute top-6 right-6 z-20 w-72 glass-strong rounded-2xl p-5 shadow-2xl border border-white/10 backdrop-blur-md transition-all duration-500 hover:border-white/20 hover:shadow-[0_0_30px_rgba(255,255,255,0.05)]">
       <div className="flex items-center justify-between mb-4 border-b border-white/10 pb-3">
         <div className="flex items-center gap-2">
           <Activity className="w-5 h-5 text-cyan-400" />

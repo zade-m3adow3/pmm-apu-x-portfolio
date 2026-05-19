@@ -6,16 +6,20 @@ import * as Icons from 'lucide-react';
 interface SidebarProps {
   activeModule: ModuleId;
   setActiveModule: (id: ModuleId) => void;
+  onHoverChange?: (hovered: boolean) => void;
 }
 
-export function Sidebar({ activeModule, setActiveModule }: SidebarProps) {
+export function Sidebar({ activeModule, setActiveModule, onHoverChange }: SidebarProps) {
   const [isHovered, setIsHovered] = useState(false);
 
+  const handleEnter = () => { setIsHovered(true);  onHoverChange?.(true); };
+  const handleLeave = () => { setIsHovered(false); onHoverChange?.(false); };
+
   return (
-    <aside 
-      className={`fixed left-0 top-0 bottom-0 z-40 bg-slate-950/80 backdrop-blur-xl border-r border-white/10 transition-all duration-300 flex flex-col items-center py-8 ${isHovered ? 'w-64' : 'w-20'}`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+    <aside
+      className={`fixed left-0 top-0 bottom-0 z-40 bg-slate-950/95 backdrop-blur-xl border-r border-white/10 transition-all duration-300 flex flex-col items-center py-8 ${isHovered ? 'w-64' : 'w-20'}`}
+      onMouseEnter={handleEnter}
+      onMouseLeave={handleLeave}
     >
       <div className="mb-12 flex items-center justify-center w-full relative">
         <div className="absolute inset-0 bg-cyan-500/20 blur-xl rounded-full w-12 h-12 mx-auto"></div>

@@ -13,7 +13,7 @@ export function StatusBar() {
   } = useSimulation();
 
   return (
-    <div className="fixed bottom-0 left-20 right-0 h-10 bg-slate-950/90 border-t border-white/10 backdrop-blur-md z-40 flex items-center px-4 font-mono text-[10px] text-slate-400 uppercase tracking-widest">
+    <div className="w-full h-10 bg-slate-950/90 border-t border-white/10 backdrop-blur-md flex-shrink-0 flex items-center px-4 font-mono text-[10px] text-slate-400 uppercase tracking-widest z-30">
       
       {/* Left section: Terminal Output style */}
       <div className="flex items-center gap-2 flex-1">

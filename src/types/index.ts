@@ -34,7 +34,7 @@ export interface ChartDataPoint {
 }
 
 // ─── Module Navigation ──────────────────────────────────────────────
-export type ModuleId = 'metaphor' | 'sandbox' | 'substrate' | 'proofs';
+export type ModuleId = 'metaphor' | 'sandbox' | 'substrate' | 'proofs' | 'stiefel' | 'thermal' | 'contraction' | 'hero' | 'coaxial' | 'errata';
 
 export interface ModuleNavItem {
   id: ModuleId;

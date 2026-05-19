@@ -69,6 +69,48 @@ export const MODULE_NAV: ModuleNavItem[] = [
     icon: 'ScrollText',
     description: 'Analytical Proofs Ledger',
   },
+  {
+    id: 'hero',
+    label: 'Epistemic Core',
+    shortLabel: 'Hero',
+    icon: 'Hexagon',
+    description: 'PMM-APU-X Abstract',
+  },
+  {
+    id: 'stiefel',
+    label: 'ECF Stiefel Tracker',
+    shortLabel: 'Stiefel',
+    icon: 'Activity',
+    description: 'Lyapunov Stability — Thm 2.19',
+  },
+  {
+    id: 'thermal',
+    label: 'Thermal & DASM Rollback',
+    shortLabel: 'Thermal',
+    icon: 'Thermometer',
+    description: 'Boundary Cond. 2 & Lemma 6.1',
+  },
+  {
+    id: 'coaxial',
+    label: 'Coaxial Interconnect',
+    shortLabel: 'Coaxial',
+    icon: 'Link',
+    description: 'Perfect Faraday Invariant',
+  },
+  {
+    id: 'errata',
+    label: 'Dynamic Errata Ledger',
+    shortLabel: 'Errata',
+    icon: 'FileText',
+    description: 'Errata & Rectifications',
+  },
+  {
+    id: 'contraction',
+    label: 'Memory Contraction',
+    shortLabel: 'Contraction',
+    icon: 'GitMerge',
+    description: 'Banach Fixed-Point — Thm 2.13',
+  },
 ];
 
 // ─── APU-X Substrate Layer Specs ────────────────────────────────────
