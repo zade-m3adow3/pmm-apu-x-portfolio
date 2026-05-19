@@ -22,20 +22,26 @@ void main() {
     // Current position on the sphere/manifold
     vec3 pos = position;
     
+    // Manifold morphing: twist and distort based on noise sigma
+    float morph = smoothstep(0.0, 3.0, uSigma);
+    vec3 saddlePos = vec3(pos.x, pos.y, pos.x*pos.x - pos.y*pos.y);
+    saddlePos = normalize(saddlePos) * 2.0;
+    vec3 currentManifold = mix(pos, saddlePos, morph);
+    
     // Lyapunov flow vector: move towards stable trajectory
-    vec3 flow = normalize(cross(pos, vec3(0.0, 1.0, 0.0))) * uEtaEff * 2.0;
+    vec3 flow = normalize(cross(currentManifold, vec3(0.0, 1.0, 0.0))) * uEtaEff * 2.0;
     
     // Adversarial noise displacement
     // Pseudo-random noise based on phase and time
     float noise = sin(uTime * 10.0 + aPhase) * cos(uTime * 5.0 - aPhase);
-    vec3 scattered = pos + normalize(aTargetDir) * noise * uSigma * 0.5;
+    vec3 scattered = currentManifold + normalize(aTargetDir) * noise * uSigma * 0.5;
     
     // Convergence factor: higher etaEff means we stick closer to the flow
     float convergence = smoothstep(0.0, 0.02, uEtaEff);
-    vec3 finalPos = mix(scattered, pos + flow * sin(uTime + aPhase), convergence);
+    vec3 finalPos = mix(scattered, currentManifold + flow * sin(uTime + aPhase), convergence);
     
-    // Project back to manifold surface (approximate by normalizing)
-    finalPos = normalize(finalPos) * 2.0;
+    // Project back to manifold surface (approximate by normalizing and scaling)
+    finalPos = normalize(finalPos) * mix(2.0, 2.5, morph);
 
     vec4 mvPosition = modelViewMatrix * vec4(finalPos, 1.0);
     gl_PointSize = (4.0 + convergence * 2.0) * (10.0 / -mvPosition.z);
@@ -118,9 +124,9 @@ function StiefelStreamlines({ sigma, etaEff }: { sigma: number, etaEff: number }
   return (
     <points ref={pointsRef}>
       <bufferGeometry>
-        <bufferAttribute attach="attributes-position" count={PARTICLE_COUNT} array={positions} itemSize={3} />
-        <bufferAttribute attach="attributes-aPhase" count={PARTICLE_COUNT} array={phases} itemSize={1} />
-        <bufferAttribute attach="attributes-aTargetDir" count={PARTICLE_COUNT} array={targetDirs} itemSize={3} />
+        <bufferAttribute attach="attributes-position" args={[positions, 3]} count={PARTICLE_COUNT} array={positions} itemSize={3} />
+        <bufferAttribute attach="attributes-aPhase" args={[phases, 1]} count={PARTICLE_COUNT} array={phases} itemSize={1} />
+        <bufferAttribute attach="attributes-aTargetDir" args={[targetDirs, 3]} count={PARTICLE_COUNT} array={targetDirs} itemSize={3} />
       </bufferGeometry>
       <shaderMaterial
         vertexShader={stiefelVertexShader}

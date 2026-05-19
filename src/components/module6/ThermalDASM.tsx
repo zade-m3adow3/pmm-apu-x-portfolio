@@ -9,6 +9,9 @@ import {
 import { InlineMath } from 'react-katex';
 import { AlertTriangle, Zap, RotateCcw } from 'lucide-react';
 
+useGLTF.preload('/base.glb');
+useGLTF.preload('/Grid.glb');
+
 // ─── Physical constants (from thesis) ───────────────────────────────────────
 const KAPPA_VERTICAL = 1400;   // W/m·K — CNT pillar thermal conductivity
 const D_LAYER = 0.85e-9;       // 850 nm layer thickness in metres
@@ -31,17 +34,19 @@ interface APUXModelProps {
 }
 
 function APUXModel({ isInterrupt, power }: APUXModelProps) {
-  const { scene } = useGLTF('/base.glb');
+  const { scene: baseScene } = useGLTF('/base.glb');
+  const { scene: gridScene } = useGLTF('/Grid.glb');
   const groupRef = useRef<THREE.Group>(null);
   const flashTimerRef = useRef(0);
   const matPairsRef = useRef<THREE.MeshStandardMaterial[]>([]);
 
   // Clone scene + all materials upfront — stored in ref for useFrame
-  const cloned = React.useMemo(() => {
-    const c = scene.clone(true);
+  const { clonedBase, clonedGrid } = React.useMemo(() => {
+    const cBase = baseScene.clone(true);
+    const cGrid = gridScene.clone(true);
     const mats: THREE.MeshStandardMaterial[] = [];
 
-    c.traverse((node: any) => {
+    const processNode = (node: any) => {
       if (!node.isMesh) return;
       const mesh = node as THREE.Mesh;
       const orig = Array.isArray(mesh.material) ? mesh.material[0] : mesh.material;
@@ -61,11 +66,14 @@ function APUXModel({ isInterrupt, power }: APUXModelProps) {
       stdMat.emissiveIntensity = 0;
       mesh.material = stdMat;
       mats.push(stdMat);
-    });
+    };
+
+    cBase.traverse(processNode);
+    cGrid.traverse(processNode);
 
     matPairsRef.current = mats;
-    return c;
-  }, [scene]);
+    return { clonedBase: cBase, clonedGrid: cGrid };
+  }, [baseScene, gridScene]);
 
   useFrame((_, delta) => {
     if (!groupRef.current) return;
@@ -89,8 +97,9 @@ function APUXModel({ isInterrupt, power }: APUXModelProps) {
   });
 
   return (
-    <group ref={groupRef} scale={[1.2, 1.2, 1.2]} position={[0, -0.5, 0]}>
-      <primitive object={cloned} />
+    <group ref={groupRef} scale={[0.45, 0.45, 0.45]} position={[0, -1.0, 0]}>
+      <primitive object={clonedBase} />
+      <primitive object={clonedGrid} position={[0, 0.5, 0]} />
     </group>
   );
 }
@@ -183,7 +192,7 @@ export function ThermalDASM() {
       <div className="flex-1 flex overflow-hidden">
         {/* 3D Model Panel */}
         <div className="w-[360px] flex-shrink-0 relative border-r border-white/5">
-          <Canvas camera={{ position: [0, 2, 7], fov: 45 }}>
+          <Canvas camera={{ position: [0, 4, 12], fov: 60 }}>
             <color attach="background" args={['#020617']} />
             <ambientLight intensity={0.4} />
             <directionalLight position={[5, 10, 5]} intensity={1.5} />

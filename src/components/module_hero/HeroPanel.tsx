@@ -1,4 +1,4 @@
-import React, { useRef, useState, useMemo } from 'react';
+import React, { useRef, useState, useMemo, useEffect } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { useGLTF, Environment } from '@react-three/drei';
 import * as THREE from 'three';
@@ -6,6 +6,7 @@ import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 import { InlineMath, BlockMath } from 'react-katex';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 // Preload the model
 useGLTF.preload('/base.glb');
@@ -84,7 +85,7 @@ function BaseArchitecture({ targetPart }: { targetPart: string | null }) {
   });
 
   return (
-    <group ref={groupRef} scale={[3, 3, 3]} position={[0, -1, 0]}>
+    <group ref={groupRef} scale={[1.2, 1.2, 1.2]} position={[0, -1, 0]}>
       <primitive object={cloned} />
     </group>
   );
@@ -93,9 +94,25 @@ function BaseArchitecture({ targetPart }: { targetPart: string | null }) {
 // -- Main Component
 export function HeroPanel() {
   const [hoveredSection, setHoveredSection] = useState<string | null>(null);
+  
+  // Dummy data for the Hero chart
+  const [chartData, setChartData] = useState<{t: number, pmm: number, sota: number}[]>([]);
+  useEffect(() => {
+    let tick = 0;
+    const id = setInterval(() => {
+      tick++;
+      setChartData(prev => {
+        const pmm = 0.95 + Math.sin(tick * 0.1) * 0.05 + Math.random() * 0.02;
+        const sota = Math.max(0.1, 0.9 - tick * 0.02 + Math.random() * 0.1);
+        const next = [...prev, { t: tick, pmm, sota }];
+        return next.slice(-100);
+      });
+    }, 100);
+    return () => clearInterval(id);
+  }, []);
 
   return (
-    <div className="w-full h-full flex bg-slate-950 overflow-hidden">
+    <div className="w-full h-full flex bg-slate-950 overflow-hidden relative">
       {/* Left Side: Clinical Abstract */}
       <div className="w-1/2 h-full overflow-y-auto border-r border-white/5 p-8 custom-scrollbar">
         <h1 className="text-3xl font-bold font-mono tracking-widest text-cyan-400 mb-8">
@@ -192,6 +209,28 @@ export function HeroPanel() {
           backgroundImage: 'linear-gradient(rgba(30, 41, 59, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(30, 41, 59, 0.5) 1px, transparent 1px)',
           backgroundSize: '40px 40px'
         }}></div>
+
+        {/* Dynamic Trajectory Graph overlay */}
+        <div className="absolute bottom-8 right-8 z-10 w-[400px] h-[220px] bg-slate-900/80 backdrop-blur-md border border-white/10 rounded-xl p-5 shadow-2xl flex flex-col pointer-events-auto">
+          <div className="text-[10px] font-mono text-slate-400 uppercase tracking-widest mb-3 flex justify-between">
+            <span>Global Stability Trajectory</span>
+            <span className="text-cyan-400">Real-Time</span>
+          </div>
+          <div className="flex-1 min-h-0">
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart data={chartData} margin={{ top: 5, right: 5, left: -20, bottom: 0 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
+                <XAxis dataKey="t" tick={false} axisLine={false} />
+                <YAxis tick={{ fill: '#64748b', fontSize: 10, fontFamily: 'monospace' }} domain={[0, 1.2]} axisLine={false} tickLine={false} />
+                <Tooltip
+                  contentStyle={{ background: '#0f172a', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, fontFamily: 'monospace', fontSize: 11 }}
+                />
+                <Line type="monotone" dataKey="pmm" name="PMM (Stable)" stroke="#22d3ee" strokeWidth={2} dot={false} isAnimationActive={false} />
+                <Line type="monotone" dataKey="sota" name="SOTA (Collapse)" stroke="#ef4444" strokeWidth={2} strokeDasharray="4 4" dot={false} isAnimationActive={false} />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
       </div>
     </div>
   );

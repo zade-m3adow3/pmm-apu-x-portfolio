@@ -1,6 +1,5 @@
 import type { TheoremDef, SimulationState } from '../types';
 import { estimateRegretBound, computeCascadeReliability } from '../simulation/simulationEngine';
-import { HW_METRICS } from '../context/SimulationContext';
 
 export const THEOREMS: TheoremDef[] = [
   {
@@ -102,7 +101,8 @@ export const THEOREMS: TheoremDef[] = [
     getLiveValue: (state: SimulationState) => {
       if (state.modelType === 'PMM') {
         // Use actual GIM filter value from state
-        const w = (state as any).gimFilterW ?? (Math.exp(-0.5 * state.tick * 0.01) + (state.isAttacked ? 0.3 : 0.05));
+        const extState = state as SimulationState & { gimFilterW?: number };
+        const w = extState.gimFilterW ?? (Math.exp(-0.5 * state.tick * 0.01) + (state.isAttacked ? 0.3 : 0.05));
         return w.toFixed(5);
       }
       return state.isAttacked ? `${(1.0 + state.tick * 0.001).toFixed(4)} (∞→)` : (1.0 + state.tick * 0.001).toFixed(4);

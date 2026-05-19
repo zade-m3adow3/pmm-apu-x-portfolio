@@ -11,6 +11,7 @@ import { AlertTriangle, Zap, RotateCcw } from 'lucide-react';
 
 // Preload heavy asset
 useGLTF.preload('/Grid.glb');
+useGLTF.preload('/base.glb');
 
 // -- Physics Constants
 const KAPPA_VERTICAL = 1400;   // W/m·K
@@ -134,7 +135,7 @@ function InstancedGridModel({ isInterrupt, power }: { isInterrupt: boolean, powe
            ref={(el) => { if (el) instancedMeshRefs.current[i] = el; }}
            args={[data.geom, data.mat, data.transforms.length]}
          >
-           {data.transforms.map((mat, j) => (
+           {data.transforms.map((mat: THREE.Matrix4, j: number) => (
              <primitive key={j} object={mat} attachArray="instanceMatrix" />
            ))}
          </instancedMesh>
@@ -217,6 +218,7 @@ function DirectGridModel({ isInterrupt, power }: { isInterrupt: boolean, power: 
   return (
     <group ref={groupRef} position={[0, -1, 0]} scale={[0.8, 0.8, 0.8]}>
       <primitive object={cloned} />
+      <primitive object={useGLTF('/base.glb').scene.clone()} position={[0, -0.5, 0]} scale={[1.2, 1.2, 1.2]} />
     </group>
   );
 }
@@ -295,7 +297,7 @@ export function CrossbarThermal() {
       <div className="flex-1 flex overflow-hidden">
         {/* 3D Model Panel */}
         <div className="w-[450px] flex-shrink-0 relative border-r border-white/5 bg-[#08080C]">
-          <Canvas camera={{ position: [5, 4, 8], fov: 50 }}>
+          <Canvas camera={{ position: [5, 4, 10], fov: 60 }}>
             <color attach="background" args={['#08080C']} />
             <ambientLight intensity={0.5} />
             <directionalLight position={[10, 10, 5]} intensity={1.5} color="#e0f2fe" />

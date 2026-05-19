@@ -68,7 +68,7 @@ function DataStream({ active, length = 10 }: { active: boolean, length?: number 
   return (
     <points ref={pointsRef}>
       <bufferGeometry>
-        <bufferAttribute attach="attributes-position" count={positions.length / 3} array={positions} itemSize={3} />
+        <bufferAttribute attach="attributes-position" args={[positions, 3]} count={positions.length / 3} array={positions} itemSize={3} />
       </bufferGeometry>
       <pointsMaterial color="#00f0ff" size={0.05} transparent opacity={0.8} blending={THREE.AdditiveBlending} depthWrite={false} />
     </points>

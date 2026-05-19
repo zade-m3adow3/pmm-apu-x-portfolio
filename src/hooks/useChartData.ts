@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from 'react';
 import { useSimulation } from '../context/SimulationContext';
 import type { ChartDataPoint } from '../types';
-import { DEFAULT_PARAMS, estimateRegretBound } from '../simulation/simulationEngine';
+import { DEFAULT_PARAMS } from '../simulation/simulationEngine';
 
 /**
  * Streaming chart data hook driven by the full PMM simulation engine.
