@@ -97,9 +97,9 @@ function APUXModel({ isInterrupt, power }: APUXModelProps) {
   });
 
   return (
-    <group ref={groupRef} scale={[0.45, 0.45, 0.45]} position={[0, -1.0, 0]}>
-      <primitive object={clonedBase} />
-      <primitive object={clonedGrid} position={[0, 0.5, 0]} />
+    <group ref={groupRef} scale={[0.65, 0.65, 0.65]} position={[0, -0.5, 0]}>
+      <primitive object={clonedBase} scale={[1.25, 1.25, 1.25]} position={[0, -0.6, 0]} />
+      <primitive object={clonedGrid} position={[0, 0.2, 0]} />
     </group>
   );
 }
@@ -168,7 +168,7 @@ export function ThermalDASM() {
   const displayTheta = thetaRoll ?? thetaCurr;
 
   return (
-    <div className="w-full h-full flex flex-col bg-slate-950 overflow-hidden">
+    <div className="w-full h-full flex flex-col bg-[#08080C] overflow-hidden">
       {/* Header */}
       <div className="px-8 pt-7 pb-4 flex-shrink-0 border-b border-white/5">
         <div className="flex items-start justify-between gap-4">
@@ -191,9 +191,9 @@ export function ThermalDASM() {
 
       <div className="flex-1 flex overflow-hidden">
         {/* 3D Model Panel */}
-        <div className="w-[360px] flex-shrink-0 relative border-r border-white/5">
-          <Canvas camera={{ position: [0, 4, 12], fov: 60 }}>
-            <color attach="background" args={['#020617']} />
+        <div className="w-[450px] flex-shrink-0 relative border-r border-white/5">
+          <Canvas camera={{ position: [6, 4, 10], fov: 50 }}>
+            <color attach="background" args={['#08080C']} />
             <ambientLight intensity={0.4} />
             <directionalLight position={[5, 10, 5]} intensity={1.5} />
             <pointLight position={[0, 5, 0]} intensity={isWarning ? 2 : 0.5} color={isWarning ? '#ef4444' : '#f59e0b'} />
@@ -201,7 +201,7 @@ export function ThermalDASM() {
             <React.Suspense fallback={null}>
               <APUXModel isInterrupt={isInterrupt} power={power} />
             </React.Suspense>
-            <OrbitControls enablePan={false} minDistance={3} maxDistance={12} />
+            <OrbitControls enablePan={false} minDistance={3} maxDistance={20} />
           </Canvas>
 
           {/* Power readout overlay */}
@@ -236,7 +236,7 @@ export function ThermalDASM() {
                 Computational Power Density
               </label>
               <div className="text-center mb-2">
-                <InlineMath math={`P_{density} = ${power.toFixed(2)}\\,\\text{W/mm}^3`} />
+                <InlineMath math={String.raw`P_{density} = ${power.toFixed(2)}\,\text{W/mm}^3`} />
               </div>
               <input
                 type="range" min="0.1" max="12.5" step="0.1"
@@ -249,7 +249,7 @@ export function ThermalDASM() {
                 <span>0.1 W/mm³</span><span>12.5 W/mm³ (max)</span>
               </div>
               <div className="mt-3 text-center overflow-x-auto">
-                <InlineMath math={`\\Delta T_{max} = \\frac{P_{density}\\,d_{layer}^2}{2\\kappa_{vertical}}`} />
+                <InlineMath math={String.raw`\Delta T_{max} = \frac{P_{density}\,d_{layer}^2}{2\kappa_{vertical}}`} />
               </div>
             </div>
 
@@ -297,7 +297,7 @@ export function ThermalDASM() {
             </div>
             {rollbackFlash && (
               <div className="mt-3 text-center overflow-x-auto">
-                <InlineMath math="\\mathcal{S}_{rollback}(\\theta_{t+1}) = (I_d - \\mathcal{A}_t)\\theta_{t+1} + \\mathcal{A}_t\\theta_{snapshot}" />
+                <InlineMath math={String.raw`\mathcal{S}_{rollback}(\theta_{t+1}) = (I_d - \mathcal{A}_t)\theta_{t+1} + \mathcal{A}_t\theta_{snapshot}`} />
               </div>
             )}
           </div>

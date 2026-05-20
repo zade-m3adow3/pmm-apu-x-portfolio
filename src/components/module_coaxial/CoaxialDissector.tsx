@@ -243,7 +243,7 @@ export function CoaxialDissector() {
 
         <div className="mt-auto bg-slate-900/80 p-5 rounded-xl border border-white/10 shadow-inner">
           <div className="text-center text-purple-300 mb-2">
-            <BlockMath math="n \times E = 0" />
+            <BlockMath math={String.raw`n \times E = 0`} />
           </div>
           <div className="text-[10px] text-slate-400 font-mono text-center uppercase tracking-widest">
             Perfect Faraday Invariant

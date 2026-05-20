@@ -112,7 +112,7 @@ export function HeroPanel() {
   }, []);
 
   return (
-    <div className="w-full h-full flex bg-slate-950 overflow-hidden relative">
+    <div className="w-full h-full flex bg-[#08080C] overflow-hidden relative">
       {/* Left Side: Clinical Abstract */}
       <div className="w-1/2 h-full overflow-y-auto border-r border-white/5 p-8 custom-scrollbar">
         <h1 className="text-3xl font-bold font-mono tracking-widest text-cyan-400 mb-8">
@@ -132,7 +132,7 @@ export function HeroPanel() {
               The Post-Mitigated Abraxas Model is defined as a non-stationary Markov Decision Process embedded within a continuous-time neuromorphic substrate, optimized under structural adversarial streams.
             </p>
             <div className="bg-slate-900/80 p-4 rounded-lg font-mono text-sm overflow-x-auto text-cyan-300 shadow-inner">
-              <BlockMath math="\mathcal{M}_{PMM} = \left( \mathcal{S}, \mathcal{A}, P_t, R_t, \gamma, \mathcal{E}_{DASM} \right)" />
+              <BlockMath math={String.raw`\mathcal{M}_{PMM} = \left( \mathcal{S}, \mathcal{A}, P_t, R_t, \gamma, \mathcal{E}_{DASM} \right)`} />
             </div>
           </div>
 
@@ -145,11 +145,11 @@ export function HeroPanel() {
             <div className="absolute top-0 left-0 w-1 h-full bg-emerald-500/0 group-hover:bg-emerald-500 transition-colors"></div>
             <h2 className="text-lg font-mono text-slate-300 mb-4 tracking-widest">THEOREM 2.19: LYAPUNOV STABILITY</h2>
             <p className="text-sm text-slate-400 mb-4 leading-relaxed font-mono">
-              Under adaptive step-size compression <InlineMath math="\eta_t^{eff}" />, the system maintains strict asymptotic stability on the Stiefel manifold.
+              Under adaptive step-size compression <InlineMath math={String.raw`\eta_t^{eff}`} />, the system maintains strict asymptotic stability on the Stiefel manifold.
             </p>
             <div className="bg-slate-900/80 p-4 rounded-lg font-mono text-sm overflow-x-auto text-emerald-300 shadow-inner flex flex-col gap-4">
-              <BlockMath math="\eta_t^{eff} = \frac{\eta_t}{1 + \frac{\hat{\sigma}_t^2}{\delta_{min}}}" />
-              <BlockMath math="\dot{V}(U_t) \le -2\delta_k V(U_t)" />
+              <BlockMath math={String.raw`\eta_t^{eff} = \frac{\eta_t}{1 + \frac{\hat{\sigma}_t^2}{\delta_{min}}}`} />
+              <BlockMath math={String.raw`\dot{V}(U_t) \le -2\delta_k V(U_t)`} />
             </div>
           </div>
 
@@ -165,7 +165,7 @@ export function HeroPanel() {
               Ensures computational integrity by constraining the maximum thermal drift across the monolithic 3D crossbar matrix.
             </p>
             <div className="bg-slate-900/80 p-4 rounded-lg font-mono text-sm overflow-x-auto text-amber-300 shadow-inner">
-              <BlockMath math="\Delta T_{max} = \frac{P_{density} d_{layer}^2}{2\kappa_{vertical}}" />
+              <BlockMath math={String.raw`\Delta T_{max} = \frac{P_{density} d_{layer}^2}{2\kappa_{vertical}}`} />
             </div>
           </div>
           
@@ -181,7 +181,7 @@ export function HeroPanel() {
               Electromagnetic containment achieved via Coaxial Heterogeneous Shielding (CHS).
             </p>
             <div className="bg-slate-900/80 p-4 rounded-lg font-mono text-sm overflow-x-auto text-purple-300 shadow-inner">
-              <BlockMath math="n \times E = 0" />
+              <BlockMath math={String.raw`n \times E = 0`} />
             </div>
           </div>
         </div>

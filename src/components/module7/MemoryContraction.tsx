@@ -200,7 +200,7 @@ export function MemoryContraction() {
             07 MEMORY CONTRACTION MAPPING
           </h2>
           <div className="text-sm text-slate-400 font-mono mt-2 bg-[#08080C]/80 inline-block px-4 py-2 rounded-lg border border-white/5 backdrop-blur-md max-w-xl">
-            Theorem 2.13 — Strict Contraction of Memory Refinement. Banach Fixed-Point convergence of hierarchical prototype operator <InlineMath math="\Phi" />.
+            Theorem 2.13 — Strict Contraction of Memory Refinement. Banach Fixed-Point convergence of hierarchical prototype operator <InlineMath math={String.raw`\Phi`} />.
           </div>
         </div>
 
@@ -224,7 +224,7 @@ export function MemoryContraction() {
                Banach Fixed-Point Theorem
              </h3>
              <div className="text-center overflow-x-auto text-emerald-300 mb-6 font-bold">
-               <BlockMath math="\|\Phi(x, y) - \Phi(x_2, y)\|_2 \le (1 - \epsilon_0)\|x_1 - x_2\|_2" />
+               <BlockMath math={String.raw`\|\Phi(x, y) - \Phi(x_2, y)\|_2 \le (1 - \epsilon_0)\|x_1 - x_2\|_2`} />
              </div>
              
              <div className="grid grid-cols-2 gap-4 mb-6">
@@ -242,7 +242,7 @@ export function MemoryContraction() {
                Refinement Operator
              </h3>
              <div className="text-center overflow-x-auto text-white mb-4">
-               <BlockMath math="\Phi(x, y) = w_x x + w_y y" />
+               <BlockMath math={String.raw`\Phi(x, y) = w_x x + w_y y`} />
              </div>
              <p className="text-xs text-slate-400 font-mono text-center">
                Points collapse towards a canonical cluster at the fixed point, ensuring bounded long-term memory stability.

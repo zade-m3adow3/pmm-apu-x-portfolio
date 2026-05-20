@@ -17,7 +17,7 @@ export function SubstrateExplorer() {
   };
 
   return (
-    <div className="w-full h-full relative bg-slate-950 flex">
+    <div className="w-full h-full relative bg-[#08080C] flex">
       
       {/* Overlay UI */}
       <div className="absolute top-8 left-8 z-10 pointer-events-none">
@@ -44,7 +44,7 @@ export function SubstrateExplorer() {
       {/* 3D Canvas */}
       <div className="flex-1 w-full h-full">
         <Canvas camera={{ position: [15, 10, 15], fov: 40 }}>
-          <color attach="background" args={['#020617']} />
+          <color attach="background" args={['#08080C']} />
           <ambientLight intensity={0.5} />
           <directionalLight position={[10, 10, 5]} intensity={1.5} />
           <Environment preset="city" />

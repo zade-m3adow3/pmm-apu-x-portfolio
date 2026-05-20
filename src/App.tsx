@@ -44,7 +44,7 @@ function AppContent() {
   };
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-slate-950 text-slate-200">
+    <div className="flex h-screen w-screen overflow-hidden bg-[#08080C] text-slate-200">
       {/* Sidebar — fixed, but we track its expanded state to shift main content */}
       <Sidebar
         activeModule={activeModule}

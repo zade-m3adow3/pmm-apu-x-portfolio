@@ -10,12 +10,12 @@ import * as THREE from 'three';
 
 export function MetaphorCanvas() {
   return (
-    <div className="w-full h-full relative bg-slate-950">
+    <div className="w-full h-full relative bg-[#08080C]">
       <Canvas
         camera={{ position: [0, 8, 20], fov: 45 }}
         gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping }}
       >
-        <color attach="background" args={['#020617']} />
+        <color attach="background" args={['#08080C']} />
         
         {/* Lighting */}
         <ambientLight intensity={0.2} />

@@ -273,7 +273,7 @@ export function CrossbarThermal() {
   const displayTheta = thetaRoll ?? thetaCurr;
 
   return (
-    <div className="w-full h-full flex flex-col bg-slate-950 overflow-hidden text-[#E2E8F0]">
+    <div className="w-full h-full flex flex-col bg-[#08080C] overflow-hidden text-[#E2E8F0]">
       {/* Header */}
       <div className="px-8 pt-7 pb-4 flex-shrink-0 border-b border-white/5">
         <div className="flex items-start justify-between gap-4">
@@ -318,7 +318,7 @@ export function CrossbarThermal() {
                 Computational Power Density (<InlineMath math="P_{density}" />)
               </label>
               <div className="text-center mb-2 font-bold text-amber-400 text-lg">
-                <InlineMath math={`P_{density} = ${power.toFixed(2)}\\,\\text{W/mm}^3`} />
+                <InlineMath math={String.raw`P_{density} = ${power.toFixed(2)}\,\text{W/mm}^3`} />
               </div>
               <input
                 type="range" min="0.1" max="12.5" step="0.1"
@@ -353,10 +353,10 @@ export function CrossbarThermal() {
           <div className="grid grid-cols-2 gap-6">
             <div className="bg-slate-900/60 backdrop-blur-md rounded-xl p-6 border border-white/10 flex flex-col justify-center">
               <div className="text-center overflow-x-auto text-amber-400">
-                <BlockMath math={`\\Delta T_{max} = \\frac{P_{density}\\,d_{layer}^2}{2\\kappa_{vertical}}`} />
+                <BlockMath math={String.raw`\Delta T_{max} = \frac{P_{density}\,d_{layer}^2}{2\kappa_{vertical}}`} />
               </div>
               <p className="text-xs text-slate-400 text-center font-mono mt-4">
-                Vertical CNT pillars maintain <span className="text-emerald-400 text-sm"><InlineMath math="\kappa_{vertical} \ge 1400" /></span> W/m·K.
+                Vertical CNT pillars maintain <span className="text-emerald-400 text-sm"><InlineMath math={String.raw`\kappa_{vertical} \ge 1400`} /></span> W/m·K.
               </p>
             </div>
 

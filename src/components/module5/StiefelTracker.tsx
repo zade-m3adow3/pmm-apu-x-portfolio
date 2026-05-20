@@ -178,7 +178,7 @@ export function StiefelTracker() {
           05 ECF STIEFEL MANIFOLD TRACKER
         </h2>
         <p className="text-sm text-slate-400 font-mono mt-1">
-          Theorem 2.19 (Lyapunov Stability). Interactive tracking error convergence on <InlineMath math="\mathcal{V}_k(\mathbb{R}^d)" />.
+          Theorem 2.19 (Lyapunov Stability). Interactive tracking error convergence on <InlineMath math={String.raw`\mathcal{V}_k(\mathbb{R}^d)`} />.
         </p>
       </div>
 
@@ -201,10 +201,10 @@ export function StiefelTracker() {
         <div className="relative z-10 w-[400px] h-full p-6 flex flex-col justify-center gap-6">
           <div className="bg-slate-900/60 backdrop-blur-md border border-white/10 rounded-xl p-5 shadow-2xl">
             <label className="block font-mono text-xs text-slate-400 mb-3 uppercase tracking-widest">
-              Adversarial Noise Injection (<InlineMath math="\hat{\sigma}_t^2" />)
+              Adversarial Noise Injection (<InlineMath math={String.raw`\hat{\sigma}_t^2`} />)
             </label>
             <div className="text-center mb-2 font-mono text-amber-400 font-bold">
-              <InlineMath math={`\\hat{\\sigma}_t^2 = ${sigma.toFixed(2)}`} />
+              <InlineMath math={String.raw`\hat{\sigma}_t^2 = ${sigma.toFixed(2)}`} />
             </div>
             <input
               type="range" min="0" max="5" step="0.01"
@@ -226,20 +226,20 @@ export function StiefelTracker() {
             <div className="space-y-2">
               <div className="text-[10px] text-slate-500 font-mono uppercase">Effective Step-Size</div>
               <div className="text-cyan-400 font-bold text-lg font-mono">
-                <InlineMath math={`\\eta_t^{eff} = ${etaEff.toFixed(4)}`} />
+                <InlineMath math={String.raw`\eta_t^{eff} = ${etaEff.toFixed(4)}`} />
               </div>
               <div className="text-xs text-slate-400 overflow-x-auto pb-2">
-                 <BlockMath math={`\\eta_t^{eff} = \\frac{\\eta_t}{1 + \\frac{\\hat{\\sigma}_t^2}{\\delta_{min}}}`} />
+                 <BlockMath math={String.raw`\eta_t^{eff} = \frac{\eta_t}{1 + \frac{\hat{\sigma}_t^2}{\delta_{min}}}`} />
               </div>
             </div>
 
             <div className="space-y-2 pt-2 border-t border-white/10">
               <div className="text-[10px] text-slate-500 font-mono uppercase">Lyapunov Dissipation</div>
               <div className="text-emerald-400 font-bold text-lg font-mono">
-                <InlineMath math={`\\dot{V} = ${vDot.toFixed(4)}`} />
+                <InlineMath math={String.raw`\dot{V} = ${vDot.toFixed(4)}`} />
               </div>
               <div className="text-xs text-slate-400 overflow-x-auto pb-2">
-                 <BlockMath math={`\\dot{V}(U_t) \\le -2\\delta_k V(U_t)`} />
+                 <BlockMath math={String.raw`\dot{V}(U_t) \le -2\delta_k V(U_t)`} />
               </div>
             </div>
           </div>

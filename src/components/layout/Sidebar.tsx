@@ -17,7 +17,7 @@ export function Sidebar({ activeModule, setActiveModule, onHoverChange }: Sideba
 
   return (
     <aside
-      className={`fixed left-0 top-0 bottom-0 z-40 bg-slate-950/95 backdrop-blur-xl border-r border-white/10 transition-all duration-300 flex flex-col items-center py-8 ${isHovered ? 'w-64' : 'w-20'}`}
+      className={`fixed left-0 top-0 bottom-0 z-40 bg-[#08080C]/95 backdrop-blur-xl border-r border-white/10 transition-all duration-300 flex flex-col items-center py-8 ${isHovered ? 'w-64' : 'w-20'}`}
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
     >
