@@ -5,7 +5,7 @@ import * as THREE from 'three';
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from 'recharts';
-import { InlineMath, BlockMath } from 'react-katex';
+import { InlineMath, BlockMath } from '../Math';
 
 // -- WebGL Shaders
 const stiefelVertexShader = `

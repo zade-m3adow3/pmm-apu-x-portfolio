@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Terminal, CheckCircle2, XCircle, AlertCircle, RefreshCw } from 'lucide-react';
-import { InlineMath, BlockMath } from 'react-katex';
+import { InlineMath, BlockMath } from '../Math';
 
 interface ErrataItem {
   id: number;

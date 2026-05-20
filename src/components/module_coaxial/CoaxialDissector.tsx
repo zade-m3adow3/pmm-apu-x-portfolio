@@ -2,7 +2,7 @@ import React, { useRef, useState, useMemo } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls, useGLTF, Environment, Text } from '@react-three/drei';
 import * as THREE from 'three';
-import { InlineMath, BlockMath } from 'react-katex';
+import { InlineMath, BlockMath } from '../Math';
 
 useGLTF.preload('/Coaxial.glb');
 

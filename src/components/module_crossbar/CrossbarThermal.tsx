@@ -6,7 +6,7 @@ import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer, ReferenceLine,
 } from 'recharts';
-import { InlineMath, BlockMath } from 'react-katex';
+import { InlineMath, BlockMath } from '../Math';
 import { AlertTriangle, Zap, RotateCcw } from 'lucide-react';
 
 // Preload heavy asset

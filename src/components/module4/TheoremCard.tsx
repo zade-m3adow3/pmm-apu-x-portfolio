@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import type { TheoremDef } from '../../types';
 import { useSimulation } from '../../context/SimulationContext';
 import { ChevronDown, ChevronRight, Activity } from 'lucide-react';
-import { BlockMath } from 'react-katex';
-import 'katex/dist/katex.min.css';
+import { BlockMath } from '../Math';
 
 interface TheoremCardProps {
   theorem: TheoremDef;

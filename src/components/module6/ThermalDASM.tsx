@@ -6,7 +6,7 @@ import {
   AreaChart, Area, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer, ReferenceLine,
 } from 'recharts';
-import { InlineMath } from 'react-katex';
+import { InlineMath } from '../Math';
 import { AlertTriangle, Zap, RotateCcw } from 'lucide-react';
 
 useGLTF.preload('/base.glb');
